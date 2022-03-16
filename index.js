@@ -256,71 +256,204 @@
 
 // ---------------------------------------------------------
 
-function getCoords(anchor) {
-    let box = anchor.getBoundingClientRect();
+// function getCoords(anchor) {
+//     let box = anchor.getBoundingClientRect();
 
-    return {
-        top: box.top + window.pageYOffset,
-        right: box.right + window.pageXOffset,
-        bottom: box.bottom + window.pageYOffset,
-        left: box.left + window.pageXOffset
-    };
+//     return {
+//         top: box.top + window.pageYOffset,
+//         right: box.right + window.pageXOffset,
+//         bottom: box.bottom + window.pageYOffset,
+//         left: box.left + window.pageXOffset
+//     };
+// }
+
+// function positionAt(anchor, position, elem) {
+
+//     let coords = getCoords(anchor);
+//     // let ttt = anchor.getBoundingClientRect();
+
+//     switch (position) {
+//         case "top-out":
+//             elem.style.top = coords.top - elem.offsetHeight + "px"
+//             elem.style.left = coords.left + "px"
+//             break;
+
+//         case "right-out":
+//             elem.style.top = coords.top + "px"
+//             elem.style.left = coords.left + anchor.clientWidth + "px"
+//             break;
+
+//         case "bottom-out":
+//             elem.style.top = coords.bottom + "px"
+//             elem.style.left = coords.left + "px"
+//             break;
+
+//         case "top-in":
+//             elem.style.top = coords.top + "px"
+//             elem.style.left = coords.left + "px"
+//             break;
+
+//         case "right-in":
+//             elem.style.top = coords.top + "px"
+//             elem.style.left = coords.left + anchor.clientWidth - elem.offsetWidth + "px"
+//             break;
+
+//         case "bottom-in":
+//             elem.style.top = coords.bottom - elem.offsetHeight + "px"
+//             elem.style.left = coords.left + "px"
+//             break;
+//     }
+
+// }
+
+// function showNote(anchor, position, html) {
+//     let note = document.createElement('div');
+//     note.className = "note";
+//     note.innerHTML = html;
+//     document.body.append(note);
+
+//     positionAt(anchor, position, note);
+// }
+
+// // test it
+// let blockquote = document.querySelector('blockquote');
+
+// showNote(blockquote, "top-out", "note above");
+// showNote(blockquote, "right-out", "note at the right");
+// showNote(blockquote, "bottom-out", "note below");
+// showNote(blockquote, "top-in", "note above");
+// showNote(blockquote, "right-in", "note at the right");
+// showNote(blockquote, "bottom-in", "note below");
+
+// hel.onclick = function hello() {
+
+//     alert(this)
+// }
+
+
+
+
+// ------------------------------------------------------
+
+// Переместить мяч по клику на поле
+
+// field.addEventListener("click", func)
+
+// function func(event) {
+
+//     let fieldCoords = this.getBoundingClientRect();
+
+//     ball.style.top = event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 2 + "px";
+//     ball.style.left = event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 2 + "px";
+
+//     if (parseInt(ball.style.top) < 0) {
+//         ball.style.top = 0 + "px"
+//     }
+//     if (parseInt(ball.style.left) < 0) {
+//         ball.style.left = 0 + "px"
+//     }
+//     if (parseInt(ball.style.top) + ball.clientHeight > field.clientHeight) {
+//         ball.style.top = field.clientHeight - ball.offsetHeight + "px"
+//     }
+//     if (parseInt(ball.style.left) + ball.clientWidth > field.clientWidth) {
+//         ball.style.left = field.clientWidth - ball.offsetWidth + "px"
+//     }
+// }
+
+//Создать закрывающийся и открывающийся при нажатии список
+// let hony = document.querySelector(".hony");
+// let name_list = document.querySelector(".name_list ");
+
+// name_list.addEventListener("click", func_open);
+
+// function func_open() {
+//     hony.classList.toggle("open")
+// }
+
+// ---------------------------------------------------------------------
+// Добавить кнопку закрытия в каждый тег р
+
+
+let remove_button = document.querySelector(".remove-button")
+let pane = document.querySelectorAll(".pane")
+
+for (elements of pane) {
+    elements.addEventListener("click", closesPane)
 }
 
-function positionAt(anchor, position, elem) {
-
-    let coords = getCoords(anchor);
-    // let ttt = anchor.getBoundingClientRect();
-
-    switch (position) {
-        case "top-out":
-            elem.style.top = coords.top - elem.offsetHeight + "px"
-            elem.style.left = coords.left + "px"
-            break;
-
-        case "right-out":
-            elem.style.top = coords.top + "px"
-            elem.style.left = coords.left + anchor.clientWidth + "px"
-            break;
-
-        case "bottom-out":
-            elem.style.top = coords.bottom + "px"
-            elem.style.left = coords.left + "px"
-            break;
-
-        case "top-in":
-            elem.style.top = coords.top + "px"
-            elem.style.left = coords.left + "px"
-            break;
-
-        case "right-in":
-            elem.style.top = coords.top + "px"
-            elem.style.left = coords.left + anchor.clientWidth - elem.offsetWidth + "px"
-            break;
-
-        case "bottom-in":
-            elem.style.top = coords.bottom - elem.offsetHeight + "px"
-            elem.style.left = coords.left + "px"
-            break;
-    }
-
+function closesPane() {
+    this.style.display = "none"
 }
 
-function showNote(anchor, position, html) {
-    let note = document.createElement('div');
-    note.className = "note";
-    note.innerHTML = html;
-    document.body.append(note);
+// ------------------------------------------------------------------------
 
-    positionAt(anchor, position, note);
+// Создайте карусель
+
+// let i = 1;
+// for (let li of document.querySelectorAll('li')) {
+//     li.style.position = 'relative';
+//     li.insertAdjacentHTML('beforeend', `<span style="position:absolute;left:0;top:0">${i}</span>`);
+//     i++;
+// }
+
+let slider = document.querySelector(".slider")
+let carousel = document.querySelector("#carousel")
+let li = document.querySelectorAll(".slider li")
+let arrow_1 = document.querySelector(".arrow_1")
+let arrow_2 = document.querySelector(".arrow_2")
+
+arrow_2.addEventListener("click", goTo)
+arrow_1.addEventListener("click", backTo)
+let position = 0
+let x = 130
+let y = 3
+console.log(li.length)
+
+function goTo() {
+    position -= x * y;
+    position = Math.max(position, -x * (li.length - y))
+    carousel.style.marginLeft = position + "px"
 }
 
-// test it
-let blockquote = document.querySelector('blockquote');
+function backTo() {
+    position += x * y;
+    position = Math.min(position, 0)
+    carousel.style.marginLeft = position + "px"
+}
 
-showNote(blockquote, "top-out", "note above");
-showNote(blockquote, "right-out", "note at the right");
-showNote(blockquote, "bottom-out", "note below");
-showNote(blockquote, "top-in", "note above");
-showNote(blockquote, "right-in", "note at the right");
-showNote(blockquote, "bottom-in", "note below");
+// function backTo() {
+//     carousel.style.marginLeft = y + "px"
+//     y += 391
+// }
+
+
+// let img = Array.from(document.querySelectorAll(".slider li"))
+//     //console.log(getComputedStyle(img[0]).display)
+// let arrow_1 = document.querySelector(".arrow_1")
+// let arrow_2 = document.querySelector(".arrow_2")
+
+// arrow_2.addEventListener("click", goTo)
+// arrow_1.addEventListener("click", backTo)
+// let y = 0;
+
+// function goTo() {
+
+//     for (let i = 0; i < img.length; i++) {
+//         if (y < img.length - 3) {
+//             img[y].style.display = "none"
+//             y += 1
+//             break
+//         }
+//     }
+// }
+
+// function backTo() {
+//     for (let i = 0; i < img.length; i++) {
+//         if (y > 0) {
+//             y -= 1
+//             img[y].style.display = "inline-block"
+
+//             break
+//         }
+//     }
+// }

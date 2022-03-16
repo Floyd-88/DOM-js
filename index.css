@@ -90,3 +90,184 @@ blockquote:before {
     margin-right: .25em;
     vertical-align: -.4em;
 }
+
+#field {
+    position: relative;
+    width: 200px;
+    height: 150px;
+    border: 10px solid black;
+    background-color: #00FF00;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#ball {
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    transition: 1s all
+}
+
+.hony {
+    padding: 30px;
+}
+
+.hony ul {
+    display: none;
+}
+
+.hony .name_list {
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.hony .name_list::before {
+    background-position: center;
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 1px solid;
+    margin-right: 6px;
+    background: url(https://st2.depositphotos.com/4060975/8059/v/600/depositphotos_80596450-stock-illustration-down-arrow-vector-icon.jpg);
+    background-size: contain;
+    transform: rotate(-90deg);
+}
+
+.hony.open .name_list::before {
+    transform: rotate(0deg);
+}
+
+.hony.open ul {
+    display: block;
+}
+
+
+/* ------------------------------------------------- */
+
+body {
+    margin: 10px auto;
+    width: 470px;
+}
+
+h3 {
+    margin: 0;
+    padding-bottom: .3em;
+    font-size: 1.1em;
+}
+
+p {
+    margin: 0;
+    padding: 0 0 .5em;
+}
+
+.pane {
+    background: #edf5e1;
+    padding: 10px 20px 10px;
+    border-top: solid 2px #c4df9b;
+    position: relative;
+}
+
+.remove_button {
+    font-size: 110%;
+    color: darkred;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    position: absolute;
+}
+
+
+/* -------------------------------------------------------------- */
+
+.slider {
+    position: relative;
+    width: 493px;
+    height: 178px;
+    background: #ccc;
+    display: flex;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 27px;
+    margin: 47px;
+}
+
+.wrap {
+    position: relative;
+    width: 390px;
+    height: 184px;
+    overflow: hidden;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.arrow_1 {
+    padding: 0px;
+    background: #ddd;
+    border-radius: 15px;
+    border: 1px solid gray;
+    font-size: 24px;
+    line-height: 24px;
+    color: #444;
+    display: block;
+    position: absolute;
+    left: 21px;
+    top: 68px;
+}
+
+.arrow_2 {
+    padding: 0px;
+    background: #ddd;
+    border-radius: 15px;
+    border: 1px solid gray;
+    font-size: 24px;
+    line-height: 24px;
+    color: #444;
+    display: block;
+    position: absolute;
+    left: 442px;
+    top: 68px;
+}
+
+.arrow_2:focus,
+.arrow_1:focus {
+    outline: none;
+}
+
+.arrow_2:hover,
+.arrow_1:hover {
+    background: #ccc;
+    cursor: pointer;
+}
+
+ul {
+    position: absolute;
+    height: 130px;
+    width: 9999px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0;
+    background-color: #ccc;
+    margin-left: 0;
+    transition: all 1s;
+}
+
+ul img {
+    width: 130px;
+    height: 130px;
+    display: block;
+    /* убираем пустое место вокруг картинок */
+}
+
+ul li {
+    display: inline-block;
+    /* убираем пустое место между элементами списка */
+}
