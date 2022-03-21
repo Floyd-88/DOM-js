@@ -396,30 +396,30 @@
 //     i++;
 // }
 
-let slider = document.querySelector(".slider")
-let carousel = document.querySelector("#carousel")
-let li = document.querySelectorAll(".slider li")
-let arrow_1 = document.querySelector(".arrow_1")
-let arrow_2 = document.querySelector(".arrow_2")
+// let slider = document.querySelector(".slider")
+// let carousel = document.querySelector("#carousel")
+// let li = document.querySelectorAll(".slider li")
+// let arrow_1 = document.querySelector(".arrow_1")
+// let arrow_2 = document.querySelector(".arrow_2")
 
-arrow_2.addEventListener("click", goTo)
-arrow_1.addEventListener("click", backTo)
-let position = 0
-let x = 130
-let y = 3
-console.log(li.length)
+// arrow_2.addEventListener("click", goTo)
+// arrow_1.addEventListener("click", backTo)
+// let position = 0
+// let x = 130
+// let y = 3
+// console.log(li.length)
 
-function goTo() {
-    position -= x * y;
-    position = Math.max(position, -x * (li.length - y))
-    carousel.style.marginLeft = position + "px"
-}
+// function goTo() {
+//     position -= x * y;
+//     position = Math.max(position, -x * (li.length - y))
+//     carousel.style.marginLeft = position + "px"
+// }
 
-function backTo() {
-    position += x * y;
-    position = Math.min(position, 0)
-    carousel.style.marginLeft = position + "px"
-}
+// function backTo() {
+//     position += x * y;
+//     position = Math.min(position, 0)
+//     carousel.style.marginLeft = position + "px"
+// }
 
 // ----------------------------------------------------------------------
 
@@ -470,76 +470,322 @@ function backTo() {
 // -----------------------------------------------------------------------------------------
 //Сортировка таблицы
 
-grid.onclick = function(e) { //запускаем функцию по клику и передаем аргументом эвент
-    if (e.target.tagName != 'TH') return; //если элемент по которому мы кликнули не является тегом TH пропускаем его
+// grid.onclick = function(e) { //запускаем функцию по клику и передаем аргументом эвент
+//     if (e.target.tagName != 'TH') return; //если элемент по которому мы кликнули не является тегом TH пропускаем его
 
-    let th = e.target;
-    // если ячейка TH, тогда сортировать
-    // cellIndex - это номер ячейки th:
-    //   0 для первого столбца
-    //   1 для второго и т.д.
-    sortGrid(th.cellIndex, th.dataset.type); //вызываем функцию с аргументами - номер столбца и тип ячейки number или string
-};
+//     let th = e.target;
+//     // если ячейка TH, тогда сортировать
+//     // cellIndex - это номер ячейки th:
+//     //   0 для первого столбца
+//     //   1 для второго и т.д.
+//     sortGrid(th.cellIndex, th.dataset.type); //вызываем функцию с аргументами - номер столбца и тип ячейки number или string
+// };
 
-function sortGrid(colNum, type) {
-    let tbody = grid.querySelector('tbody'); //обращаемся к телу таблицы
+// function sortGrid(colNum, type) {
+//     let tbody = grid.querySelector('tbody'); //обращаемся к телу таблицы
 
-    let rowsArray = Array.from(tbody.rows); //создаем массив из строк tr
+//     let rowsArray = Array.from(tbody.rows); //создаем массив из строк tr
 
-    // compare(a, b) сравнивает две строки, нужен для сортировки
-    let compare;
+//     // compare(a, b) сравнивает две строки, нужен для сортировки
+//     let compare;
 
-    switch (type) { //создаем метод свич в котором выполняется одно из условий в зависимости от того что приходит в type, либо столбец с числами, либо со строками
-        case 'number':
-            compare = function(rowA, rowB) { //функция принимает 2 аргумента и сравнивает их между собой
-                return rowA.cells[colNum].innerHTML - rowB.cells[colNum].innerHTML; // значение из ячейки одной строки сравнивается с значением из другой строки в рамках одного столбца, меньшее значение откидывается в одну сторону, большее в другую и так сравниваются все значения со всеми
+//     switch (type) { //создаем метод свич в котором выполняется одно из условий в зависимости от того что приходит в type, либо столбец с числами, либо со строками
+//         case 'number':
+//             compare = function(rowA, rowB) { //функция принимает 2 аргумента и сравнивает их между собой
+//                 return rowA.cells[colNum].innerHTML - rowB.cells[colNum].innerHTML; // значение из ячейки одной строки сравнивается с значением из другой строки в рамках одного столбца, меньшее значение откидывается в одну сторону, большее в другую и так сравниваются все значения со всеми
 
-            };
-            break;
-        case 'string':
-            compare = function(rowA, rowB) {
-                return rowA.cells[colNum].innerHTML > rowB.cells[colNum].innerHTML ? 1 : -1; //метод сравнения для строк
-            };
-            break;
-    }
+//             };
+//             break;
+//         case 'string':
+//             compare = function(rowA, rowB) {
+//                 return rowA.cells[colNum].innerHTML > rowB.cells[colNum].innerHTML ? 1 : -1; //метод сравнения для строк
+//             };
+//             break;
+//     }
 
-    // сортировка
-    rowsArray.sort(compare); //вызываем вышеуказанный метод сортировки
+//     // сортировка
+//     rowsArray.sort(compare); //вызываем вышеуказанный метод сортировки
 
-    tbody.append(...rowsArray); // вставляем перебранный массив строк обратно в таблицу
-}
+//     tbody.append(...rowsArray); // вставляем перебранный массив строк обратно в таблицу
+// }
 
 // ------------------------------------------------------------------------------------------------
 //Добавить подсказку
-let show //создаю переменную для помещения в нее выплывающей подсказки
+// let show //создаю переменную для помещения в нее выплывающей подсказки
 
-document.body.addEventListener("mouseover", funcShow) // создаю события наведения мышкой и уход мышки с элемента
-document.body.addEventListener("mouseout", funcNotShow)
+// document.body.addEventListener("mouseover", funcShow) // создаю события наведения мышкой и уход мышки с элемента
+// document.body.addEventListener("mouseout", funcNotShow)
 
-function funcShow(event) {
-    if (!event.target.dataset.tooltip) { // если элемент не имеет атрибут tooltip дальнейшие действия не выполняются
-        return
-    }
-    show = document.createElement("div") // создаем элемент и размещеаем его на странице
-    show.classList.add("tooltip")
-    show.innerHTML = event.target.dataset.tooltip
-    document.body.append(show)
+// function funcShow(event) {
+//     if (!event.target.dataset.tooltip) { // если элемент не имеет атрибут tooltip дальнейшие действия не выполняются
+//         return
+//     }
+//     show = document.createElement("div") // создаем элемент и размещеаем его на странице
+//     show.classList.add("tooltip")
+//     show.innerHTML = event.target.dataset.tooltip
+//     document.body.append(show)
 
-    let pos = event.target.getBoundingClientRect() // позицианируем подсказку
-    show.style.left = pos.left + (event.target.offsetWidth - show.offsetWidth) / 2 + "px"
-    if (parseInt(show.style.left) < 0) {
-        show.style.left = 0 + "px"
-    }
-    show.style.top = pos.top - show.offsetHeight - 5 + "px"
-    if (parseInt(show.style.top) < 0) {
-        show.style.top = pos.top + event.target.offsetHeight + 5 + "px"
-    }
-    document.body.removeEventListener("mouseover", funcShow) // отменяем событие наведения на элемент
+//     let pos = event.target.getBoundingClientRect() // позицианируем подсказку
+//     show.style.left = pos.left + (event.target.offsetWidth - show.offsetWidth) / 2 + "px"
+//     if (parseInt(show.style.left) < 0) {
+//         show.style.left = 0 + "px"
+//     }
+//     show.style.top = pos.top - show.offsetHeight - 5 + "px"
+//     if (parseInt(show.style.top) < 0) {
+//         show.style.top = pos.top + event.target.offsetHeight + 5 + "px"
+//     }
+//     document.body.removeEventListener("mouseover", funcShow) // отменяем событие наведения на элемент
+// }
+
+// function funcNotShow(event) { // создаем функцию ухода мышки с элемента
+//     if (event.target.dataset.tooltip) {
+//         show.hidden = true // если мышка покинула элемент он исчезает со страницы
+//         document.body.addEventListener("mouseover", funcShow) // снова создаем событие отсеживания мышки на элементе
+//     }
+// }
+
+// ------------------------------------------------------------------
+//Покидание страницы
+
+// contents.addEventListener("click", linkOpen)
+
+// function linkOpen(event) {
+//     let e = event.target
+//     if (!e.closest("a")) return
+//     let question = confirm(`Do you really visit on ${e.href}?`)
+//     if (question === false) {
+//         event.preventDefault()
+//     }
+//     console.log(question)
+// }
+
+// -------------------------------------------------------------------------
+//Создать галерею
+
+// thumbs.addEventListener("click", changeImg)
+
+// function changeImg(event) {
+//     if (!event.target.closest("a")) return
+//     event.preventDefault()
+
+//     let linkImg = event.target.closest("a")
+//     largeImg.src = linkImg.getAttribute("href")
+//     largeImg.alt = linkImg.title
+// }
+
+
+// --------------------------------------------------------------------------------
+
+//Выделение списка при клике на него
+// ul.addEventListener("click", select)
+// ul.addEventListener("click", selectKey)
+
+// function select(event) {
+//     let e = event.target;
+//     if (!e.closest("li")) return
+
+//     if (!e.className && !event.cmdKey && !event.ctrlKey) {
+//         for (el of ul.children) {
+//             if (el.className = "selected") {
+//                 el.classList.remove("selected")
+//             }
+//         }
+//         e.classList.add("selected")
+//     }
+// }
+
+// function selectKey(event) {
+//     let e = event.target;
+//     if (!e.closest("li")) return
+
+//     if (event.ctrlKey || event.cmdKey) {
+//         e.classList.toggle("selected")
+//     }
+// }
+
+// --------------------------------------------------------------------------------------------------
+//Сделать подсказку на вложенном элементе
+
+// let house = document.querySelector("#house")
+// let show;
+
+// document.addEventListener("mouseover", showOp)
+// document.addEventListener("mouseout", showCl)
+
+// function showOp(event) {
+//     let e = event.target.closest('[data-tooltip]');
+//     if (!e) return
+
+//     show = document.createElement("div");
+//     show.classList.add("tooltip")
+//     show.innerHTML = e.dataset.tooltip
+//     document.body.append(show)
+
+//     let pos = e.getBoundingClientRect()
+//     show.style.left = pos.left + (e.offsetWidth - show.offsetWidth) / 2 + "px"
+//     if (parseInt(show.style.left) < 0) {
+//         show.style.left = 0 + "px"
+//     }
+//     show.style.top = pos.top - show.offsetHeight - 5 + "px"
+//     if (parseInt(show.style.top) < 0) {
+//         show.style.top = pos.top + e.offsetHeight + 5 + "px"
+//     }
+// }
+
+// function showCl(event) {
+//     let e = event.target.closest('[data-tooltip]');
+//     if (!e) return
+//     show.hidden = true
+// }
+
+// -------------------------------------------------------------------------------------------
+
+// Селать подсказку только при остановке мышки
+
+
+
+// let div = document.createElement('div');
+// let timerId
+
+// class Help {
+//     constructor(elem, tooltipText) {
+//         this.elem = elem
+//         this.tooltipText = tooltipText
+//     }
+//     over() {
+//         this.elem.addEventListener("mouseenter", overAdd)
+//         let tooltipText_2 = this.tooltipText
+//         let newElem = this.elem
+
+//         function overAdd() {
+
+//             timerId = setTimeout(time, 400)
+
+//             function time() {
+//                 //Элемент с подсказкой
+//                 div.className = "tooltip";
+//                 div.innerHTML = tooltipText_2;
+//                 div.hidden = false
+//                 document.body.append(div)
+
+//                 // Позиционирование подсказки
+
+//                 let pos = newElem.getBoundingClientRect()
+
+//                 div.style.left = pos.left + (newElem.offsetWidth - div.offsetWidth) / 2 + "px"
+//                 if (parseInt(div.style.left) < 0) {
+//                     div.style.left = 0 + "px"
+//                 }
+//                 div.style.top = pos.top - div.offsetHeight - 5 + "px"
+//                 if (parseInt(div.style.top) < 0) {
+//                     div.style.top = pos.top + newElem.offsetHeight + 5 + "px"
+//                 }
+//             }
+//         }
+//         this.out()
+//     }
+//     out() {
+//         this.elem.addEventListener("mouseleave", outAdd)
+
+//         function outAdd() {
+//             div.hidden = true
+//             clearInterval(timerId)
+//         }
+//     }
+// }
+// let clock = new Help(el, "Helppppp")
+// clock.over()
+
+// let block1 = new Help(test1, "test")
+// block1.over()
+
+
+
+
+// -----------------------------------------------------------------------------------------
+// Перемещение полосы слайдера
+
+let slider = document.querySelector("#slider")
+let thumb = document.querySelector(".thumb")
+
+thumb.addEventListener("mousedown", goThumb)
+
+function goThumb(event) {
+    event.preventDefault();
+    document.addEventListener('mousemove', onMouseMove)
+    document.addEventListener('mouseup', stopThumb)
 }
 
-function funcNotShow(event) { // создаем функцию ухода мышки с элемента
-    if (event.target.dataset.tooltip) {
-        show.hidden = true // если мышка покинула элемент он исчезает со страницы
-        document.body.addEventListener("mouseover", funcShow) // снова создаем событие отсеживания мышки на элементе
+function onMouseMove(e) {
+    thumb.style.left = (e.pageX) + "px"
+    if (parseInt(thumb.style.left) > slider.offsetWidth - thumb.offsetWidth) {
+        thumb.style.left = (slider.offsetWidth - thumb.offsetWidth) + "px"
+    }
+}
+
+function stopThumb() {
+    document.removeEventListener('mousemove', onMouseMove)
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// Перетаскивание элементов
+
+document.body.addEventListener("mousedown", footballStart)
+
+function footballStart(event) {
+    if (!event.target.closest(".draggable")) return
+
+    event.preventDefault()
+
+    event.target.ondragstart = function() {
+        return false;
+    };
+
+    let xxx = event.clientX - event.target.getBoundingClientRect().left;
+    let yyy = event.clientY - event.target.getBoundingClientRect().top;
+
+    event.target.style.position = "absolute"
+    event.target.style.zIndex = 1000;
+    document.body.append(event.target)
+
+    footballGo(event.pageX, event.pageY)
+
+
+    function footballGo(pageX, pageY) {
+        console.log(document.documentElement.scrollTop)
+        console.log(window.pageYOffset)
+        console.log(event.target.style.top)
+
+        event.target.style.left = (pageX - xxx) + "px";
+        if (parseInt(event.target.style.left) <= 0) {
+            event.target.style.left = 0 + "px"
+        }
+        if (parseInt(event.target.style.left) >= document.documentElement.clientWidth - event.target.offsetWidth) {
+            event.target.style.left = document.documentElement.clientWidth - event.target.offsetWidth + "px"
+        }
+
+        event.target.style.top = (pageY - yyy) + "px";
+        if (parseInt(event.target.style.top) <= window.pageYOffset) {
+            event.target.style.top = window.pageYOffset + "px"
+            document.documentElement.scrollTop = window.pageYOffset - 10
+        }
+        if (parseInt(event.target.style.top + event.target.offsetHeight) >= window.pageYOffset + document.documentElement.clientHeight - event.target.offsetHeight) {
+            event.target.style.top = window.pageYOffset + document.documentElement.clientHeight - event.target.offsetHeight + "px"
+            document.documentElement.scrollTop = window.pageYOffset + 10
+        }
+
+    }
+
+    function onMouseMove(event) {
+        footballGo(event.pageX, event.pageY);
+    }
+
+    document.addEventListener("mousemove", onMouseMove)
+    document.addEventListener("mouseup", onMouseUp)
+
+    function onMouseUp(event) {
+        document.removeEventListener("mousemove", onMouseMove)
+
+        //event.target.onmouseup = null;
     }
 }
