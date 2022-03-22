@@ -789,3 +789,229 @@ function footballStart(event) {
         //event.target.onmouseup = null;
     }
 }
+
+
+// ----------------------------------------------------------------------------------------------
+// События по нажатию клавиши
+
+
+
+// function runOnKeys(func, code1, code2) {
+
+function runOnKeys(func, ...code) {
+    document.addEventListener("keydown", KeyStart)
+    let keys = new Set;
+
+    function KeyStart(event) {
+
+        keys.add(event.code)
+
+        for (let key of code) { // все ли клавиши из набора нажаты?
+            if (!keys.has(key)) return;
+        }
+        keys.clear()
+        func()
+    }
+    document.addEventListener("keyup", function(event) {
+        keys.delete(event.code)
+    })
+
+}
+
+
+runOnKeys(
+    () => alert("Привет!"),
+    "KeyL",
+    "KeyK"
+);
+
+
+// ----------------------------------------------------------------------------------------------------
+// Сделать бесконечную прокрутку
+
+// let date = new Date();
+
+// document.addEventListener("scroll", InfinityData)
+
+// function InfinityData(event) {
+
+//     let scrollHeight = Math.max(
+//         document.body.scrollHeight, document.documentElement.scrollHeight,
+//         document.body.offsetHeight, document.documentElement.offsetHeight,
+//         document.body.clientHeight, document.documentElement.clientHeight
+//     );
+
+//     let heightScreen = Math.round(document.documentElement.clientHeight + window.pageYOffset)
+
+
+//     if (heightScreen >= scrollHeight - 100) {
+//         let dataNew = document.createElement("div")
+//         dataNew.classList.add(".newAdd")
+//         document.body.append(dataNew)
+//         dataNew.append(date)
+//     }
+
+
+// }
+
+
+// ------------------------------------------------------------------------------------------------
+
+// Добавить стрелку наверх
+
+document.addEventListener("scroll", up)
+let toUp = document.createElement("div")
+
+function up(event) {
+    if (window.pageYOffset >= document.documentElement.clientHeight) {
+
+        toUp.style.cssText = `display: block; border: 20px solid transparent; 
+        border-bottom: 20px solid red; position:absolute; left: 10px; 
+        cursor: pointer`
+        toUp.style.top = window.pageYOffset + 10 + "px"
+        document.body.append(toUp);
+
+        toUp.onclick = function() {
+            window.scrollTo(0, 0)
+        }
+    } else {
+        toUp.style.display = "none"
+    }
+}
+
+// ---------------------------------------------------------------------------------------------
+
+// Загрузка изображений при прокрутке страницы
+
+let astro = document.querySelectorAll("figure > img")
+
+document.addEventListener("scroll", showImg)
+
+function showImg() {
+
+    // console.log(astro[0].getBoundingClientRect().top + window.pageYOffset)
+    // console.log(window.pageYOffset + document.documentElement.clientHeight)
+
+    for (let imgElement of astro) {
+        if (window.pageYOffset + document.documentElement.clientHeight >= imgElement.getBoundingClientRect().top + window.pageYOffset) {
+            imgElement.src = imgElement.dataset.src
+        }
+        // console.log(imgElement.getBoundingClientRect().top)
+    }
+
+}
+
+
+// ------------------------------------------------------------------------------------------------------------
+
+// Добавление элемета в список
+
+// console.log(genres.value)
+// console.log(genres.options[genres.selectedIndex].text)
+
+// let newOption = new Option("Классика", "classic")
+// genres.append(newOption)
+// newOption.selected = true
+// console.log(genres.value)
+
+// console.log(
+//     `value: ${genres.value}, text: ${genres.options[genres.selectedIndex].text}`
+// );
+
+// genres.insertAdjacentHTML(
+//     "beforeend",
+//     `<option value="classic">Classic</option>`
+// );
+// genres.value = "classic";
+
+
+
+
+// --------------------------------------------------------------------------------
+// Превратить div в texteria при фокусе
+// let textarea = document.createElement("textarea")
+// let text = document.querySelector(".text")
+
+// text.addEventListener("click", function() {
+//     text.replaceWith(textarea)
+//     textarea.classList.add("text")
+//     textarea.value = text.innerHTML
+//     textarea.focus()
+//     textarea.onkeydown = function(event) {
+//         if (event.key == 'Enter') {
+//             endText()
+//         }
+//     }
+// })
+
+// textarea.addEventListener("blur", endText)
+
+// function endText() {
+//     textarea.replaceWith(text)
+//     text.innerHTML = textarea.value
+// }
+
+// -------------------------------------------------------------------------------------------------
+// Редактирование ячеек таблицы
+
+
+let textarea = document.createElement("textarea")
+let td = null;
+let ok = document.createElement("button")
+let cancel = document.createElement("button")
+
+document.addEventListener("click", editingTable)
+
+function editingTable(e) {
+    if (!e.target.closest("td")) return
+
+    td = e.target.closest("td")
+
+    let topBtn = td.getBoundingClientRect().top + td.getBoundingClientRect().height + window.pageYOffset
+    let leftBtn = td.getBoundingClientRect().left
+
+    td.replaceWith(textarea)
+    textarea.style.resize = "none"
+    textarea.style.outline = "none"
+    textarea.style.border = 0
+    textarea.style.height = 115 + "px"
+    textarea.style.position = "relative"
+    textarea.value = td.innerHTML.replace(/^ +| +$|( ) +/g, "$1")
+    textarea.focus()
+
+    ok.innerHTML = "OK"
+    ok.classList.add("class_btn")
+    ok.style.top = topBtn + 3 + "px"
+    ok.style.left = leftBtn + "px"
+
+    cancel.innerHTML = "CANCEL"
+    cancel.classList.add("class_btn")
+    cancel.classList.add("class_btn")
+    cancel.style.top = topBtn + 3 + "px"
+    cancel.style.left = leftBtn + 40 + "px"
+
+    document.body.append(ok)
+    ok.addEventListener("click", okTable)
+    ok.hidden = false
+
+    document.body.append(cancel)
+    cancel.addEventListener("click", cancelTable)
+    cancel.hidden = false
+
+    document.removeEventListener("click", editingTable)
+}
+
+function okTable() {
+    textarea.replaceWith(td)
+    td.innerHTML = textarea.value
+    ok.hidden = true
+    cancel.hidden = true
+    document.addEventListener("click", editingTable)
+}
+
+function cancelTable() {
+    textarea.replaceWith(td)
+    ok.hidden = true
+    cancel.hidden = true
+    document.addEventListener("click", editingTable)
+}
