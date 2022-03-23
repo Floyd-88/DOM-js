@@ -705,90 +705,90 @@
 // -----------------------------------------------------------------------------------------
 // Перемещение полосы слайдера
 
-let slider = document.querySelector("#slider")
-let thumb = document.querySelector(".thumb")
+// let slider = document.querySelector("#slider")
+// let thumb = document.querySelector(".thumb")
 
-thumb.addEventListener("mousedown", goThumb)
+// thumb.addEventListener("mousedown", goThumb)
 
-function goThumb(event) {
-    event.preventDefault();
-    document.addEventListener('mousemove', onMouseMove)
-    document.addEventListener('mouseup', stopThumb)
-}
+// function goThumb(event) {
+//     event.preventDefault();
+//     document.addEventListener('mousemove', onMouseMove)
+//     document.addEventListener('mouseup', stopThumb)
+// }
 
-function onMouseMove(e) {
-    thumb.style.left = (e.pageX) + "px"
-    if (parseInt(thumb.style.left) > slider.offsetWidth - thumb.offsetWidth) {
-        thumb.style.left = (slider.offsetWidth - thumb.offsetWidth) + "px"
-    }
-}
+// function onMouseMove(e) {
+//     thumb.style.left = (e.pageX) + "px"
+//     if (parseInt(thumb.style.left) > slider.offsetWidth - thumb.offsetWidth) {
+//         thumb.style.left = (slider.offsetWidth - thumb.offsetWidth) + "px"
+//     }
+// }
 
-function stopThumb() {
-    document.removeEventListener('mousemove', onMouseMove)
-}
+// function stopThumb() {
+//     document.removeEventListener('mousemove', onMouseMove)
+// }
 
-// ---------------------------------------------------------------------------------------------------------
-// Перетаскивание элементов
+// // ---------------------------------------------------------------------------------------------------------
+// // Перетаскивание элементов
 
-document.body.addEventListener("mousedown", footballStart)
+// document.body.addEventListener("mousedown", footballStart)
 
-function footballStart(event) {
-    if (!event.target.closest(".draggable")) return
+// function footballStart(event) {
+//     if (!event.target.closest(".draggable")) return
 
-    event.preventDefault()
+//     event.preventDefault()
 
-    event.target.ondragstart = function() {
-        return false;
-    };
+//     event.target.ondragstart = function() {
+//         return false;
+//     };
 
-    let xxx = event.clientX - event.target.getBoundingClientRect().left;
-    let yyy = event.clientY - event.target.getBoundingClientRect().top;
+//     let xxx = event.clientX - event.target.getBoundingClientRect().left;
+//     let yyy = event.clientY - event.target.getBoundingClientRect().top;
 
-    event.target.style.position = "absolute"
-    event.target.style.zIndex = 1000;
-    document.body.append(event.target)
+//     event.target.style.position = "absolute"
+//     event.target.style.zIndex = 1000;
+//     document.body.append(event.target)
 
-    footballGo(event.pageX, event.pageY)
+//     footballGo(event.pageX, event.pageY)
 
 
-    function footballGo(pageX, pageY) {
-        console.log(document.documentElement.scrollTop)
-        console.log(window.pageYOffset)
-        console.log(event.target.style.top)
+//     function footballGo(pageX, pageY) {
+//         console.log(document.documentElement.scrollTop)
+//         console.log(window.pageYOffset)
+//         console.log(event.target.style.top)
 
-        event.target.style.left = (pageX - xxx) + "px";
-        if (parseInt(event.target.style.left) <= 0) {
-            event.target.style.left = 0 + "px"
-        }
-        if (parseInt(event.target.style.left) >= document.documentElement.clientWidth - event.target.offsetWidth) {
-            event.target.style.left = document.documentElement.clientWidth - event.target.offsetWidth + "px"
-        }
+//         event.target.style.left = (pageX - xxx) + "px";
+//         if (parseInt(event.target.style.left) <= 0) {
+//             event.target.style.left = 0 + "px"
+//         }
+//         if (parseInt(event.target.style.left) >= document.documentElement.clientWidth - event.target.offsetWidth) {
+//             event.target.style.left = document.documentElement.clientWidth - event.target.offsetWidth + "px"
+//         }
 
-        event.target.style.top = (pageY - yyy) + "px";
-        if (parseInt(event.target.style.top) <= window.pageYOffset) {
-            event.target.style.top = window.pageYOffset + "px"
-            document.documentElement.scrollTop = window.pageYOffset - 10
-        }
-        if (parseInt(event.target.style.top + event.target.offsetHeight) >= window.pageYOffset + document.documentElement.clientHeight - event.target.offsetHeight) {
-            event.target.style.top = window.pageYOffset + document.documentElement.clientHeight - event.target.offsetHeight + "px"
-            document.documentElement.scrollTop = window.pageYOffset + 10
-        }
+//         event.target.style.top = (pageY - yyy) + "px";
+//         if (parseInt(event.target.style.top) <= window.pageYOffset) {
+//             event.target.style.top = window.pageYOffset + "px"
+//             document.documentElement.scrollTop = window.pageYOffset - 10
+//         }
+//         if (parseInt(event.target.style.top + event.target.offsetHeight) >= window.pageYOffset + document.documentElement.clientHeight - event.target.offsetHeight) {
+//             event.target.style.top = window.pageYOffset + document.documentElement.clientHeight - event.target.offsetHeight + "px"
+//             document.documentElement.scrollTop = window.pageYOffset + 10
+//         }
 
-    }
+//     }
 
-    function onMouseMove(event) {
-        footballGo(event.pageX, event.pageY);
-    }
+//     function onMouseMove(event) {
+//         footballGo(event.pageX, event.pageY);
+//     }
 
-    document.addEventListener("mousemove", onMouseMove)
-    document.addEventListener("mouseup", onMouseUp)
+//     document.addEventListener("mousemove", onMouseMove)
+//     document.addEventListener("mouseup", onMouseUp)
 
-    function onMouseUp(event) {
-        document.removeEventListener("mousemove", onMouseMove)
+//     function onMouseUp(event) {
+//         document.removeEventListener("mousemove", onMouseMove)
 
-        //event.target.onmouseup = null;
-    }
-}
+//         //event.target.onmouseup = null;
+//     }
+// }
 
 
 // ----------------------------------------------------------------------------------------------
@@ -798,32 +798,32 @@ function footballStart(event) {
 
 // function runOnKeys(func, code1, code2) {
 
-function runOnKeys(func, ...code) {
-    document.addEventListener("keydown", KeyStart)
-    let keys = new Set;
+// function runOnKeys(func, ...code) {
+//     document.addEventListener("keydown", KeyStart)
+//     let keys = new Set;
 
-    function KeyStart(event) {
+//     function KeyStart(event) {
 
-        keys.add(event.code)
+//         keys.add(event.code)
 
-        for (let key of code) { // все ли клавиши из набора нажаты?
-            if (!keys.has(key)) return;
-        }
-        keys.clear()
-        func()
-    }
-    document.addEventListener("keyup", function(event) {
-        keys.delete(event.code)
-    })
+//         for (let key of code) { // все ли клавиши из набора нажаты?
+//             if (!keys.has(key)) return;
+//         }
+//         keys.clear()
+//         func()
+//     }
+//     document.addEventListener("keyup", function(event) {
+//         keys.delete(event.code)
+//     })
 
-}
+// }
 
 
-runOnKeys(
-    () => alert("Привет!"),
-    "KeyL",
-    "KeyK"
-);
+// runOnKeys(
+//     () => alert("Привет!"),
+//     "KeyL",
+//     "KeyK"
+// );
 
 
 // ----------------------------------------------------------------------------------------------------
@@ -859,47 +859,47 @@ runOnKeys(
 
 // Добавить стрелку наверх
 
-document.addEventListener("scroll", up)
-let toUp = document.createElement("div")
+// document.addEventListener("scroll", up)
+// let toUp = document.createElement("div")
 
-function up(event) {
-    if (window.pageYOffset >= document.documentElement.clientHeight) {
+// function up(event) {
+//     if (window.pageYOffset >= document.documentElement.clientHeight) {
 
-        toUp.style.cssText = `display: block; border: 20px solid transparent; 
-        border-bottom: 20px solid red; position:absolute; left: 10px; 
-        cursor: pointer`
-        toUp.style.top = window.pageYOffset + 10 + "px"
-        document.body.append(toUp);
+//         toUp.style.cssText = `display: block; border: 20px solid transparent; 
+//         border-bottom: 20px solid red; position:absolute; left: 10px; 
+//         cursor: pointer`
+//         toUp.style.top = window.pageYOffset + 10 + "px"
+//         document.body.append(toUp);
 
-        toUp.onclick = function() {
-            window.scrollTo(0, 0)
-        }
-    } else {
-        toUp.style.display = "none"
-    }
-}
+//         toUp.onclick = function() {
+//             window.scrollTo(0, 0)
+//         }
+//     } else {
+//         toUp.style.display = "none"
+//     }
+// }
 
 // ---------------------------------------------------------------------------------------------
 
 // Загрузка изображений при прокрутке страницы
 
-let astro = document.querySelectorAll("figure > img")
+// let astro = document.querySelectorAll("figure > img")
 
-document.addEventListener("scroll", showImg)
+// document.addEventListener("scroll", showImg)
 
-function showImg() {
+// function showImg() {
 
-    // console.log(astro[0].getBoundingClientRect().top + window.pageYOffset)
-    // console.log(window.pageYOffset + document.documentElement.clientHeight)
+//     // console.log(astro[0].getBoundingClientRect().top + window.pageYOffset)
+//     // console.log(window.pageYOffset + document.documentElement.clientHeight)
 
-    for (let imgElement of astro) {
-        if (window.pageYOffset + document.documentElement.clientHeight >= imgElement.getBoundingClientRect().top + window.pageYOffset) {
-            imgElement.src = imgElement.dataset.src
-        }
-        // console.log(imgElement.getBoundingClientRect().top)
-    }
+//     for (let imgElement of astro) {
+//         if (window.pageYOffset + document.documentElement.clientHeight >= imgElement.getBoundingClientRect().top + window.pageYOffset) {
+//             imgElement.src = imgElement.dataset.src
+//         }
+//         // console.log(imgElement.getBoundingClientRect().top)
+//     }
 
-}
+// }
 
 
 // ------------------------------------------------------------------------------------------------------------
@@ -955,63 +955,209 @@ function showImg() {
 // Редактирование ячеек таблицы
 
 
-let textarea = document.createElement("textarea")
-let td = null;
-let ok = document.createElement("button")
-let cancel = document.createElement("button")
+// let textarea = document.createElement("textarea")
+// let td = null;
+// let ok = document.createElement("button")
+// let cancel = document.createElement("button")
 
-document.addEventListener("click", editingTable)
+// document.addEventListener("click", editingTable)
 
-function editingTable(e) {
-    if (!e.target.closest("td")) return
+// function editingTable(e) {
+//     if (!e.target.closest("td")) return
 
-    td = e.target.closest("td")
+//     td = e.target.closest("td")
 
-    let topBtn = td.getBoundingClientRect().top + td.getBoundingClientRect().height + window.pageYOffset
-    let leftBtn = td.getBoundingClientRect().left
+//     let topBtn = td.getBoundingClientRect().top + td.getBoundingClientRect().height + window.pageYOffset
+//     let leftBtn = td.getBoundingClientRect().left
 
-    td.replaceWith(textarea)
-    textarea.style.resize = "none"
-    textarea.style.outline = "none"
-    textarea.style.border = 0
-    textarea.style.height = 115 + "px"
-    textarea.style.position = "relative"
-    textarea.value = td.innerHTML.replace(/^ +| +$|( ) +/g, "$1")
-    textarea.focus()
+//     td.replaceWith(textarea)
+//     textarea.style.resize = "none"
+//     textarea.style.outline = "none"
+//     textarea.style.border = 0
+//     textarea.style.height = 115 + "px"
+//     textarea.style.position = "relative"
+//     textarea.value = td.innerHTML.replace(/^ +| +$|( ) +/g, "$1")
+//     textarea.focus()
 
-    ok.innerHTML = "OK"
-    ok.classList.add("class_btn")
-    ok.style.top = topBtn + 3 + "px"
-    ok.style.left = leftBtn + "px"
+//     ok.innerHTML = "OK"
+//     ok.classList.add("class_btn")
+//     ok.style.top = topBtn + 3 + "px"
+//     ok.style.left = leftBtn + "px"
 
-    cancel.innerHTML = "CANCEL"
-    cancel.classList.add("class_btn")
-    cancel.classList.add("class_btn")
-    cancel.style.top = topBtn + 3 + "px"
-    cancel.style.left = leftBtn + 40 + "px"
+//     cancel.innerHTML = "CANCEL"
+//     cancel.classList.add("class_btn")
+//     cancel.classList.add("class_btn")
+//     cancel.style.top = topBtn + 3 + "px"
+//     cancel.style.left = leftBtn + 40 + "px"
 
-    document.body.append(ok)
-    ok.addEventListener("click", okTable)
-    ok.hidden = false
+//     document.body.append(ok)
+//     ok.addEventListener("click", okTable)
+//     ok.hidden = false
 
-    document.body.append(cancel)
-    cancel.addEventListener("click", cancelTable)
-    cancel.hidden = false
+//     document.body.append(cancel)
+//     cancel.addEventListener("click", cancelTable)
+//     cancel.hidden = false
 
-    document.removeEventListener("click", editingTable)
+//     document.removeEventListener("click", editingTable)
+// }
+
+// function okTable() {
+//     textarea.replaceWith(td)
+//     td.innerHTML = textarea.value
+//     ok.hidden = true
+//     cancel.hidden = true
+//     document.addEventListener("click", editingTable)
+// }
+
+// function cancelTable() {
+//     textarea.replaceWith(td)
+//     ok.hidden = true
+//     cancel.hidden = true
+//     document.addEventListener("click", editingTable)
+// }
+
+
+// -------------------------------------------------------------------------
+// Передвинуть картинку клавиатурой
+
+
+
+// mouse.tabIndex = 0;
+// mouse.addEventListener("focus", mouseGo)
+
+// function mouseGo(event) {
+//     let leftMouse = 0;
+//     let topMouse = window.pageYOffset + event.target.getBoundingClientRect().top
+
+//     document.addEventListener('keydown', function(event) {
+
+//         event.preventDefault()
+
+//         switch (event.code) {
+
+//             case 'ArrowRight':
+//                 leftMouse += 10
+//                 mouse.style.left = leftMouse + "px"
+//                 break
+
+//             case 'ArrowLeft':
+//                 leftMouse -= 10
+//                 mouse.style.left = leftMouse + "px"
+//                 break
+
+//             case 'ArrowUp':
+//                 topMouse -= 10
+//                 mouse.style.top = topMouse + "px"
+//                 break
+
+//             case 'ArrowDown':
+//                 topMouse += 10
+//                 mouse.style.top = topMouse + "px"
+//                 break
+//         }
+//     })
+
+// }
+
+
+// --------------------------------------------------------------------------------------------------------------------
+// Депозитный калькулятор
+
+// let form = document.forms.calculator
+// let money = 10000
+// let months = 12
+// let interest = 5
+// let result
+// form.addEventListener("input", changeData)
+
+// function changeData(event) {
+
+//     if (!event.target.closest("input, select")) return
+//     money = name_money.value;
+//     money_before.innerHTML = money
+//     interest = name_interest.value
+//     months = name_months.value
+
+//     result = Math.round(+money + (money * (interest / 100) * (months / 12)))
+//     money_after.innerHTML = result
+
+//     money_before_show.style.height = money / result * 100 + "px"
+
+// }
+
+// --------------------------------------------------------------------------------------
+// Модальное диалоговое окно с формой
+let formNew = document.querySelector("#prompt-form-container")
+let messagePrompt = document.querySelector("#prompt-message")
+let formPrompt = document.querySelector("#prompt-form")
+
+function showPrompt(html, callback) {
+    document.body.style.overflowY = 'hidden' //запрещаем прокрутку страницы
+
+    let cover_div = document.createElement("div") //Создаем div перекрывающий всю страницу кроме формы
+    cover_div.classList.add("cover_div")
+    document.body.append(cover_div)
+
+    formNew.style.display = "block" // показываем форму
+    messagePrompt.innerHTML = html
+    formPrompt.text.focus()
+    formPrompt.text.value = ''
+
+    function complete(value) { // скрываем форму 
+        cover_div.classList.remove("cover_div")
+        document.body.style.overflowY = ''
+        formNew.style.display = "none"
+        formPrompt.removeEventListener("submit", call3)
+        formPrompt.cancel.removeEventListener("click", call1)
+        document.removeEventListener("keydown", call2)
+        callback(value)
+
+    }
+
+    formPrompt.addEventListener("submit", call3) // При клике на Ок или Enter вывести текст
+    function call3(event) {
+        let value = formPrompt.text.value;
+        if (value == '') {
+            event.preventDefault();
+        } else {
+            complete(value)
+            return false
+        }
+
+    }
+
+    formPrompt.cancel.addEventListener("click", call1) //при клике на cancel выводим null
+    function call1() {
+        complete(null);
+    }
+
+    document.addEventListener("keydown", call2) // При нажатии на Esc выводим null
+    function call2(event) {
+        if (event.code === "Escape") {
+            complete(null);
+        }
+    }
+
+    let lastElem = formPrompt.elements[formPrompt.elements.length - 1]; // Переключение Tab возможно только внутри формы
+    let firstElem = formPrompt.elements[0];
+    lastElem.onkeydown = function(e) {
+        if (e.key == 'Tab' && !e.shiftKey) {
+            firstElem.focus();
+            return false;
+        }
+    };
+    firstElem.onkeydown = function(e) {
+        if (e.key == 'Tab' && e.shiftKey) {
+            lastElem.focus();
+            return false;
+        }
+    };
 }
 
-function okTable() {
-    textarea.replaceWith(td)
-    td.innerHTML = textarea.value
-    ok.hidden = true
-    cancel.hidden = true
-    document.addEventListener("click", editingTable)
-}
+show_button.addEventListener("click", show)
 
-function cancelTable() {
-    textarea.replaceWith(td)
-    ok.hidden = true
-    cancel.hidden = true
-    document.addEventListener("click", editingTable)
+function show() {
+    showPrompt("Введите что-нибудь<br>...умное :)", function(value) {
+        alert(value);
+    })
 }

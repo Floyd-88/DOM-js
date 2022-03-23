@@ -543,7 +543,7 @@
     <!-- ------------------------------------------------------------------------- -->
     <!-- Редактирование ячеек таблицы -->
 
-    <p>Кликните на ячейку таблицы, чтобы отредактировать её. Нажмите ОК или ОТМЕНА, когда закончите.</p>
+    <!-- <p>Кликните на ячейку таблицы, чтобы отредактировать её. Нажмите ОК или ОТМЕНА, когда закончите.</p>
 
     <table id="bagua-table">
         <tr>
@@ -601,7 +601,96 @@
             </td>
         </tr>
 
+    </table> -->
+
+    <!-- -------------------------------------------------------------------------------------------------- -->
+    <!-- Передвинуть картинку клавиатурой -->
+    <!-- 
+    <pre id="mouse">
+        _   _
+       (q\_/p)
+        /. .\
+       =\_t_/=   __
+        /   \   (
+       ((   ))   )
+       /\) (/\  /
+       \  Y  /-'
+        nn^nn
+       </pre>
+ -->
+
+    <!-- ------------------------------------------------------------------------------------------------- -->
+    <!-- Депозитный калькулятор -->
+    <p>Депозитный калькулятор.</p>
+    <form name="calculator">
+        <table>
+            <tr>
+                <td>Первоначальный депозит</td>
+                <td>
+                    <input id="name_money" name="money" type="number" value="10000" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Срок вклада?</td>
+                <td>
+                    <select id="name_months" name="months">
+                <option value="3">3 (минимум)</option>
+                <option value="6">6 (полгода)</option>
+                <option value="12" selected>12 (год)</option>
+                <option value="18">18 (1.5 года)</option>
+                <option value="24">24 (2 года)</option>
+                <option value="30">30 (2.5 года)</option>
+                <option value="36">36 (3 года)</option>
+                <option value="60">60 (5 лет)</option>
+              </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Годовая процентная ставка?</td>
+                <td>
+                    <input id="name_interest" name="interest" type="number" value="5" required>
+                </td>
+            </tr>
+        </table>
+
+
+    </form>
+
+
+    <table id="diagram">
+        <tr>
+            <th>Было:</th>
+            <th>Станет:</th>
+        </tr>
+        <tr>
+            <th id="money_before">10000</th>
+            <th id="money_after">10000</th>
+        </tr>
+        <td>
+            <div id="money_before_show" style="background: red;width:40px;height:100px"></div>
+        </td>
+        <td>
+            <div id="money_after_show" style="background: green;width:40px;height:100px" id="height-after"></div>
+        </td>
     </table>
+
+    <!-- ---------------------------------------------------------------------------------------------- -->
+    <!-- Модальное диалоговое окно с формой -->
+
+    <input type="button" value="Кликните, чтобы увидеть форму" id="show_button">
+
+    <div id="prompt-form-container">
+        <form id="prompt-form">
+            <div id="prompt-message">Введите что-нибудь...
+                <br>Пожалуйста..</div>
+            <input name="text" type="text">
+            <input type="submit" value="Ok">
+            <input type="button" name="cancel" value="Отмена">
+        </form>
+    </div>
+
+
+
     <script src="./index.js"></script>
 </body>
 
